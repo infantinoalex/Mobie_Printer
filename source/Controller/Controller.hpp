@@ -10,7 +10,7 @@
 class Controller
 {
     public:
-        Controller(int bumperPort, Image image);
+        Controller(int bumperPort, ImageConverter ImageConverter);
         ~Controller();
 
         bool IsStartBumperHit();
@@ -19,6 +19,7 @@ class Controller
 
     private:
         Image _image;
+        ImageConverter _imageConverter;
         int _bumperPort;
 };
 

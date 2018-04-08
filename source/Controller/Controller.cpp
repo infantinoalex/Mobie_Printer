@@ -1,19 +1,19 @@
 #include "Controller.hpp"
 
-Controller::Controller(int bumperPort, Image image)
+Controller::Controller(int bumperPort, ImageConverter ImageConverter)
 {
     if (bumperPort < 0 || bumperPort > 5)
     {
         throw invalid_argument("The provided bumper port must be between 0 - 5.")
     }
 
-    if (image == NULL)
+    if (imageConverter == NULL)
     {
         throw invalid_argument("The image must not be NULL.")
     }
 
     this->_bumperPort = bumperPort;
-    this->_image = image;
+    this->_imageConverter = imageConverter;
 }
 
 bool Controller::IsStartBumperHit()
@@ -28,7 +28,7 @@ bool Controller::IsStartBumperHit()
 
 void Controller::GrabAndConvertImageData()
 {
-    throw new not_implemented_exception("The Controller::GrabAndConvertImageData function is not implemented yet.");
+    this->_image = this->_imageConverter.GrabAndConvertImage();
 }
 
 void Controller::DrawImage()

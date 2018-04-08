@@ -11,7 +11,7 @@ class Image
         Image(int width, int height);
         ~Image();
 
-        void SetImage(unsigned int ** image, int width, int height);
+        void SetImage(unsigned int image[], int width, int height);
 
         void SetImagePixelAtIndex(int indexX, int indexY, unsigned int pixel);
 

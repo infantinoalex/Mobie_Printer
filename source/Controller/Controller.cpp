@@ -28,10 +28,10 @@ bool Controller::IsStartBumperHit()
 
 void Controller::GrabAndConvertImageData()
 {
-    throw new NotImplementedException;
+    throw new not_implemented_exception("The Controller::GrabAndConvertImageData function is not implemented yet.");
 }
 
 void Controller::DrawImage()
 {
-    throw new NotImplementedException;
+    throw new not_implemented_exception("The Controller::DrawImage function is not implemented yet.");
 }

@@ -3,13 +3,18 @@
 
 #include <stdexcept>
 
-class NotImplementedException
+class not_implemented_exception
 {
     public:
-        virtual char const * what() const
+        explicit not_implemented_exception(const string& what_arg)
+        : base (what_arg)
         { 
-            return "Fucntion not yet implemented.";
-        }
+        };
+
+        explicit not_implemented_exception(const char* what_arg)
+        : base (what_arg)
+        {
+        };
 };
 
 #endif

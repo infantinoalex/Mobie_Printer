@@ -1,9 +1,6 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-#include <stdexcept>
-#include <stdlib.h>
-
 class Image
 {
     public:

@@ -4,7 +4,6 @@
 #include "ImageConverter.hpp"
 
 #include <stdlib>
-#include <stdexcept>
 
 class ColorImageConverter : ImageConverter
 {

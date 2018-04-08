@@ -1,5 +1,8 @@
 #include "Image.hpp"
 
+#include <stdexcept>
+#include <stdlib.h>
+
 // Default constructor that initializes everything to NULL or 0
 Image::Image()
 {

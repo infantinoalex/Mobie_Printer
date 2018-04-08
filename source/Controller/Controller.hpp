@@ -10,7 +10,7 @@
 class Controller
 {
     public:
-        Controller(int bumperPort, ImageConverter ImageConverter);
+        Controller(int bumperPort, ImageConverter ImageConverter, PrinterHead printerHead);
         ~Controller();
 
         bool IsStartBumperHit();

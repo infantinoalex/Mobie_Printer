@@ -1,6 +1,9 @@
 #include "ColorImageConverter.hpp"
 #include "..\Helper.hpp"
 
+#include <stdexcept>
+
+// Constructor that initialiazes the color channels to listen to and the color images
 ColorImageConverter::ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages)
 {
     if (colorChannels == NULL)

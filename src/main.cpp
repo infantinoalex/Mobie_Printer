@@ -8,11 +8,15 @@
 #include <fstream>
 #include <string>
 #include <istream>
-#include <stdlib>
+#include <map>
+#include <stdlib.h>
+
+#define BUMPER_PORT 0
+#define NUMOFCOLORS 4
 
 std::map<Colors, Image> CreateShapeImages()
 {
-    std::map<Colors, Image> colorMap = new std::map<Colors, Image>();
+    std::map<Colors, Image> colorMap = std::map<Colors, Image>();
     int i;
     for (int i = 0; i < NUMOFCOLORS; ++i)
     {
@@ -24,7 +28,7 @@ std::map<Colors, Image> CreateShapeImages()
             ifstream inFile;
             inFile.open(fileName);
 
-            Image image = new Image(44, 22);
+            Image image = Image(44, 22);
 
             int yRow = 0;
             int xColumn = 0;
@@ -46,7 +50,7 @@ std::map<Colors, Image> CreateShapeImages()
                 }
             }
 
-            colorMap.insert(std::pair<Colors, Image>(i, image));
+            colorMap.insert(std::pair<Colors, Image>((Colors)i, image));
         }
         catch ()
         {
@@ -66,6 +70,8 @@ int main(int argc, char ** argv)
     // Initialize all classes here
     Image image;
     ImageConverter imageConverter;
+    Motor xMotor, yMotor;
+    PrinterHead printerHead;
 
     // If we will be looking for a color to make an image
     #ifdef Color
@@ -73,11 +79,11 @@ int main(int argc, char ** argv)
     int colorChannels[] = { 0, 1, 2, 3 };
 
     std::map<Colors, Image> colorsMap = CreateShapeImages();
-    imageConverter = new ColorImageConverter(colorChannels, colorsMap);
+    imageConverter = ColorImageConverter(colorChannels, colorsMap);
     
     #endif
     
-    Controller controller = new Controller(BUMPER_PORT, image);
+    Controller controller = Controller(BUMPER_PORT, imageConverter, printerHead);
 
     // End Initialization
 

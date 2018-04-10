@@ -2,6 +2,8 @@
 #define CONTROLLER_H
 
 #include "../Image/Image.hpp"
+#include "../Image/ImageConverter.hpp"
+#include "../PrinterHead/PrinterHead.hpp"
 #include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>

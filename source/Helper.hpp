@@ -1,14 +1,14 @@
 #ifndef HELPER_HPP
 #define HELPER_HPP
 
-#include "Image\Colors.hpp"
+#include "Image/Colors.hpp"
 
 #include <string>
 
-static string ConvertColorToString(int color)
+static std::string ConvertColorToString(int color)
 {
-    string strings[] = { "Blue", "Red", "Yellow", "Green" };
-    return strings[i];
+    std::string strings[] = { "Blue", "Red", "Yellow", "Green" };
+    return strings[color];
 }
 
 #endif

@@ -1,8 +1,8 @@
-#include "Exception\CustomExceptions.hpp"
-#include "Image\Image.hpp"
-#include "Controller\Controller.hpp"
+#include "Exception/CustomExceptions.hpp"
+#include "Image/Image.hpp"
+#include "Controller/Controller.hpp"
 #include "Helper.hpp"
-#include "Image\Colors.hpp"
+#include "Image/Colors.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -19,7 +19,7 @@ std::map<Colors, Image> CreateShapeImages()
         try
         {
             std::ostringstream oss;
-            oss << "Resources\\" << ConvertColorToString(i) << "shape.txt";
+            oss << "Resources/" << ConvertColorToString(i) << "shape.txt";
             std::string fileName = oss.str();
             ifstream inFile;
             inFile.open(fileName);

@@ -1,5 +1,5 @@
 #include "PrinterHead.hpp"
-#include "..\Exception\CustomExceptions.hpp"
+#include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>
 

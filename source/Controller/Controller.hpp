@@ -1,8 +1,8 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "..\Image\Image.hpp"
-#include "..\Exception\Exception.hpp"
+#include "../Image/Image.hpp"
+#include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>
 #include <kipr/botball.h>

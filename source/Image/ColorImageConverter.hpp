@@ -2,8 +2,10 @@
 #define COLORIMAGECONVERTER_HPP
 
 #include "ImageConverter.hpp"
+#include "Colors.hpp"
 
-#include <stdlib>
+#include <stdlib.h>
+#include <map>
 
 class ColorImageConverter : ImageConverter
 {

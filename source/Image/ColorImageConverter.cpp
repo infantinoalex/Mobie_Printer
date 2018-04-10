@@ -1,5 +1,5 @@
 #include "ColorImageConverter.hpp"
-#include "..\Helper.hpp"
+#include "../Helper.hpp"
 
 #include <stdexcept>
 

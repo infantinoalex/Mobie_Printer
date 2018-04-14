@@ -6,7 +6,7 @@
 class PrinterHead
 {
     public:
-        PrinterHead(int xMotorPort, int yMotorPort, int printerHeadPort);
+        PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort);
 
         void LowerPrinter();
         void RaisePrinter();
@@ -14,14 +14,14 @@ class PrinterHead
         bool TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove);
         bool TryMovePrinterHeadHome();
 
-        int GetXMotorLocation();
-        int GetYMotorLocation();
-
     private:
         Motor _xMotor;
         Motor _yMotor;
         int _printerHeadPort;
         bool _isLowered;
+
+        static int _maxServoPosition = 2097;
+        static int _minServoPosition = 0;
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-PrinterHead::PrinterHead(int printerHeadPort, Motor xMotor, Motor yMotor)
+PrinterHead::PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort)
 {
     if (printerHeadPort < 0 || printerHeadPort > 5)
     {
@@ -30,12 +30,30 @@ PrinterHead::PrinterHead(int printerHeadPort, Motor xMotor, Motor yMotor)
 
 void PrinterHead::LowerPrinter()
 {
-    throw not_implemented_exception("LowerPrinter is not implemented yet");
+    if (this->_isLowered)
+    {
+        return;
+    }
+
+    enable_servos();
+    set_servo_position(this->_printerHeadPort, this->_maxServoPosition);
+    disable_servos();
+
+    this->_isLowered = true;
 }
 
 void PrinterHead::RaisePrinter()
 {
-    throw not_implemented_exception("RaisePrinter is not implemented yet");
+    if (!this->_isLowered)
+    {
+        return;
+    }
+    
+    enable_servos();
+    set_servo_position(this->_printerHeadPort, this->_minServoPosition);
+    disable_servos();
+
+    this->_isLowered = false;
 }
 
 bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
@@ -46,14 +64,4 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 bool PrinterHead::TryMovePrinterHeadHome()
 {
     throw not_implemented_exception("MovePrinterHeadHome is not implemented yet");
-}
-
-int PrinterHead::GetXMotorLocation()
-{
-    throw not_implemented_exception("GetXMotorLocation is not implemented yet");
-}
-
-int PrinterHead::GetYMotorLocation()
-{
-    throw not_implemented_exception("GetYMotorLocation is not implemented yet");
 }

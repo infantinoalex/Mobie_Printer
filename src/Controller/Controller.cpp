@@ -52,28 +52,51 @@ void Controller::DrawImage()
         tryMovePrinterHeadHomeCounter++;
         if (tryMovePrinterHeadHomeCounter > 25)
         {
-            throw new logic_exception("Could not move printer head home within desired tries.")
+            throw drawing_exception("Could not move printer head home within desired tries.")
         }
     }
 
     std::cout << "Printing out the pixels of the image." << std::endl;
-    for (int widthLoop = 0; widthLoop < width; ++widthLoop)
+    for (int heightLoop = 0; heightLoop < height; ++heightLoop)
     {
-        for (int heightLoop = 0; heightLoop < height; ++heightLoop)
+        if (heightLoop % 2 == 0)
         {
-            int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, indexLoop);
-            if (pixelValue)
+            for (int widthLoop = 0; widthLoop < width; ++widthLoop)
             {
-                this->_printerHead.LowerPrinter();
-            }
-            else
-            {
-                this->_printerHead.RaisePrinter();
-            }
+                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, indexLoop);
+                if (pixelValue)
+                {
+                    this->_printerHead.LowerPrinter();
+                }
+                else
+                {
+                    this->_printerHead.RaisePrinter();
+                }
 
-            if (!TryMovePrinterHead(widthLoop, heightLoop))
+                if (!TryMovePrinterHead(widthLoop, heightLoop))
+                {
+                    throw drawing_exception("Could not move printer head to location.")
+                }
+            }
+        }
+        else
+        {
+            for (int widthLoop = width - 1; widthLoop > -1; --widthLoop)
             {
-                throw logic_exception("Could not move printer head to location.")
+                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, indexLoop);
+                if (pixelValue)
+                {
+                    this->_printerHead.LowerPrinter();
+                }
+                else
+                {
+                    this->_printerHead.RaisePrinter();
+                }
+
+                if (!TryMovePrinterHead(widthLoop, heightLoop))
+                {
+                    throw drawing_exception("Could not move printer head to location.")
+                }
             }
         }
     }

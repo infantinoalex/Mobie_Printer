@@ -3,6 +3,8 @@
 #include "Controller/Controller.hpp"
 #include "Helper.hpp"
 #include "Image/Colors.hpp"
+#include "PrinterHead/PrinterHead.hpp"
+#include "PrinterHead/Motor.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -12,6 +14,9 @@
 #include <stdlib.h>
 
 #define BUMPER_PORT 0
+#define XMOTOR_PORT 0
+#define YMOTOR_PORT 1
+#define PRINTERHEAD_PORT 2
 #define NUMOFCOLORS 4
 
 static std::map<Colors, Image> CreateShapeImages()
@@ -27,19 +32,18 @@ static std::map<Colors, Image> CreateShapeImages()
 int main(int argc, char ** argv)
 {
     std::cout << "Robot Printer Started" << std::endl;
-
     std::cout << "Initializing Printer" << std::endl;
 
     // Initialize all classes here
-    Image image;
-    ImageConverter imageConverter;
-    Motor xMotor, yMotor;
-    PrinterHead printerHead;
+
+    Motor xMotor = Motor(XMOTOR_PORT);
+    Motor yMotor = Motor(YMOTOR_PORT);
+    PrinterHead printerHead = PrinterHead(xMotor, yMotor, PRINTERHEAD_PORT);
 
     int colorChannels[] = { (int)Colors.Blue, (int)Colors.Red, (int)Colors.Yellow, (int)Colors.Green };
 
     std::map<Colors, Image> colorsMap = CreateShapeImages();
-    imageConverter = ColorImageConverter(colorChannels, colorsMap);
+    ImageConverter imageConverter = ColorImageConverter(colorChannels, colorsMap);
         
     Controller controller = Controller(BUMPER_PORT, imageConverter, printerHead);
 

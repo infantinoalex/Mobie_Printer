@@ -3,7 +3,7 @@
 #include <kipr/botball.h>
 #include <stdexcept>
 
-Motor::Motor(int motorPort, int motorTravelLimit)
+Motor::Motor(int motorPort)
 {
     if (motorPort < 0 || motorPort > 5)
     {
@@ -16,7 +16,6 @@ Motor::Motor(int motorPort, int motorTravelLimit)
     }
 
     this->_motorPort = motorPort;
-    this->_motorTravelLimit = motorTravelLimit;
 }
 
 void Motor::PowerMotor(int power)
@@ -48,7 +47,19 @@ int Motor::GetTotalTicks()
     return this->_totalTicksCount;
 }
 
-int GetTicksSinceLastRequest()
+int Motor::GetTicksSinceLastRequest()
 {
     return this->_lastTicksCount;
+}
+
+void Motor::ClearMotorTicks()
+{
+    clear_motor_position_counter(this->_motorPort);
+    this->_totalTicksCount = 0;
+    this->_lastTicksCount = 0;
+}
+
+int Motor::ConvertTicksToLocation()
+{
+    throw not_implemented_exception("ConvertTicksToLocation not implemented yet")
 }

@@ -12,7 +12,7 @@ class PrinterHead
         void RaisePrinter();
 
         bool TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove);
-        bool TryMovePrinterHeadHome();
+        void MovePrinterHeadHome();
 
     private:
         Motor _xMotor;

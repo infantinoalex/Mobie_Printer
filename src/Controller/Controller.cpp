@@ -46,15 +46,7 @@ void Controller::DrawImage()
 
     std::cout << "Moving printer head home before printing begins." << std::endl;
 
-    int tryMovePrinterHeadHomeCounter = 0;
-    while(!this->_printerHead.TryMovePrinterHeadHome())
-    {
-        tryMovePrinterHeadHomeCounter++;
-        if (tryMovePrinterHeadHomeCounter > 25)
-        {
-            throw drawing_exception("Could not move printer head home within desired tries.")
-        }
-    }
+    this->_printerHead.MovePrinterHeadHome();
 
     std::cout << "Printing out the pixels of the image." << std::endl;
     for (int heightLoop = 0; heightLoop < height; ++heightLoop)

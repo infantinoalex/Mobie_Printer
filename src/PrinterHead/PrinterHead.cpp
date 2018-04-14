@@ -48,7 +48,7 @@ void PrinterHead::RaisePrinter()
     {
         return;
     }
-    
+
     enable_servos();
     set_servo_position(this->_printerHeadPort, this->_minServoPosition);
     disable_servos();
@@ -58,10 +58,31 @@ void PrinterHead::RaisePrinter()
 
 bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 {
-    throw not_implemented_exception("MovePrinterHead is not implemented yet");
+    try
+    {
+        int yDirectionToTicks this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
+        this->_yMotor.PowerMotorForNumberOfTicks(5, yDirectionToTicks);
+    }
+    catch (motor_exception exception)
+    {
+        return false;
+    }
+
+    try
+    {
+        int xDirectionToTicks = this->_xMotor.ConvertLocationToMoveToTicks(xDirectionToMove);
+        this->_xMotor.PowerMotorForNumberOfTicks(5, xDirectionToTicks);
+    }
+    catch(motor_exception exception)
+    {
+        return false;
+    }
+
+    return true;
 }
 
-bool PrinterHead::TryMovePrinterHeadHome()
+void PrinterHead::MovePrinterHeadHome()
 {
-    throw not_implemented_exception("MovePrinterHeadHome is not implemented yet");
+    this->_xMotor.MoveHome();
+    this->_yMotor.MoveHome();
 }

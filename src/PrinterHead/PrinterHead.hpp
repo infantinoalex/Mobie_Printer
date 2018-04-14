@@ -11,7 +11,8 @@ class PrinterHead
         void LowerPrinter();
         void RaisePrinter();
 
-        bool MovePrinterHead(int xDirectionToMove, int yDirectionToMove);
+        bool TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove);
+        bool TryMovePrinterHeadHome();
 
         int GetXMotorLocation();
         int GetYMotorLocation();
@@ -20,6 +21,7 @@ class PrinterHead
         Motor _xMotor;
         Motor _yMotor;
         int _printerHeadPort;
+        bool _isLowered;
 };
 
 #endif

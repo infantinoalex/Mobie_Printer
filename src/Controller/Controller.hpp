@@ -7,6 +7,7 @@
 #include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>
+#include <iostream>
 #include <kipr/botball.h>
 
 class Controller
@@ -22,6 +23,7 @@ class Controller
     private:
         Image _image;
         ImageConverter _imageConverter;
+        PrinterHead _printerHead;
         int _bumperPort;
 };
 

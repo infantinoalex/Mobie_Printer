@@ -15,7 +15,7 @@ PrinterHead::PrinterHead(int printerHeadPort, Motor xMotor, Motor yMotor)
         throw invalid_argument("xMotor must not be NULL.");
     }
 
-    if (yMotor)
+    if (yMotor == NULL)
     {
         throw invalid_argument("yMotor must not be NULL.");
     }
@@ -24,6 +24,8 @@ PrinterHead::PrinterHead(int printerHeadPort, Motor xMotor, Motor yMotor)
 
     this->_xMotor = xMotor;
     this->_yMotor = yMotor;
+
+    this->_isLowered = false;
 }
 
 void PrinterHead::LowerPrinter()
@@ -36,9 +38,14 @@ void PrinterHead::RaisePrinter()
     throw not_implemented_exception("RaisePrinter is not implemented yet");
 }
 
-bool PrinterHead::MovePrinterHead(int xDirectionToMove, int yDirectionToMove)
+bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 {
     throw not_implemented_exception("MovePrinterHead is not implemented yet");
+}
+
+bool PrinterHead::TryMovePrinterHeadHome()
+{
+    throw not_implemented_exception("MovePrinterHeadHome is not implemented yet");
 }
 
 int PrinterHead::GetXMotorLocation()

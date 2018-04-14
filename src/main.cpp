@@ -14,49 +14,12 @@
 #define BUMPER_PORT 0
 #define NUMOFCOLORS 4
 
-std::map<Colors, Image> CreateShapeImages()
+static std::map<Colors, Image> CreateShapeImages()
 {
     std::map<Colors, Image> colorMap = std::map<Colors, Image>();
-    int i;
-    for (int i = 0; i < NUMOFCOLORS; ++i)
-    {
-        try
-        {
-            std::ostringstream oss;
-            oss << "Resources/" << ConvertColorToString(i) << "shape.txt";
-            std::string fileName = oss.str();
-            ifstream inFile;
-            inFile.open(fileName);
 
-            Image image = Image(44, 22);
-
-            int yRow = 0;
-            int xColumn = 0;
-            char value;
-            while(inFile.get(value))
-            {
-                if (value == '\n')
-                {
-                    yRow++;
-                    xColumn = 0;
-                }
-                else if (value == '1')
-                {
-                    image.SetImagePixelAtIndex(xColumn, yRow, 1);
-                }
-                else
-                {
-                    image.SetImagePixelAtIndex(xColumn, yRow, 0);
-                }
-            }
-
-            colorMap.insert(std::pair<Colors, Image>((Colors)i, image));
-        }
-        catch ()
-        {
-            std::cout << "Could not open file for color " << ConvertColorToString(i) << std::endl;
-        }
-    }
+    colorMap.insert(std::pair<Colors, Image>(Colors.Blue, GetBlueSquareImage()));
+    colorMap.insert(std::pair<Colors, Image>(Colors.Red, GetRedCircleImage()));
 
     return colorMap;
 }
@@ -73,16 +36,11 @@ int main(int argc, char ** argv)
     Motor xMotor, yMotor;
     PrinterHead printerHead;
 
-    // If we will be looking for a color to make an image
-    #ifdef Color
-
-    int colorChannels[] = { 0, 1, 2, 3 };
+    int colorChannels[] = { (int)Colors.Blue, (int)Colors.Red, (int)Colors.Yellow, (int)Colors.Green };
 
     std::map<Colors, Image> colorsMap = CreateShapeImages();
     imageConverter = ColorImageConverter(colorChannels, colorsMap);
-    
-    #endif
-    
+        
     Controller controller = Controller(BUMPER_PORT, imageConverter, printerHead);
 
     // End Initialization
@@ -100,8 +58,18 @@ int main(int argc, char ** argv)
         std::cout << "Image grabbed and converted" << std::endl;
         std::cout << "Drawing image" << std::endl;
 
-        controller.DrawImage();
-        std::cout << "Image has been drawn" << std::endl;
+        try
+        {
+            controller.DrawImage();
+        }
+        catch (std::exception exception)
+        {
+            std::cout << "Caught exception while trying to draw image." << std::endl;
+            std::cout << "Failed to draw image. Please try again." << std::endl;
+            std::cout << "Exception: " << exception.what() << std::endl;
+        }
+
+        std::cout << "Image has been drawn." << std::endl;
     }
 
     return 0;

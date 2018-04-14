@@ -1,4 +1,5 @@
 #include "ColorImageConverter.hpp"
+#include "Colors.hpp"
 #include "../Helper.hpp"
 
 #include <stdexcept>
@@ -27,6 +28,8 @@ virtual Image ColorImageConverter::GrabAndConvertImage()
     {
         if (loops > 200)
         {
+            camera_close();
+
             throw new camera_exception("Camera could not find image in alloted time.");
         }
 
@@ -41,9 +44,11 @@ virtual Image ColorImageConverter::GrabAndConvertImage()
 
             if (get_object_count(this->_colorChannels[i]))
             {
+                camera_close();
+
                 std::cout << "Found color " << ConvertColorToString(i) << "on screen. Converting to image." >> std::endl;
 
-                return this->_colorImages.find(i);
+                return this->_colorImages.find((Colors)i);
             }
         }
 

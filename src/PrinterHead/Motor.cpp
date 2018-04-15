@@ -4,7 +4,7 @@
 #include <kipr/botball.h>
 #include <stdexcept>
 
-Motor::Motor(int motorPort. int ticksBetweenCoordinates, int homeSensorPort, int edgeSensorPort)
+Motor::Motor(int motorPort. int ticksBetweenCoordinates, int homeSensorPort, int emergencySensorPort)
 {
     if (motorPort < 0 || motorPort > 5)
     {
@@ -21,39 +21,29 @@ Motor::Motor(int motorPort. int ticksBetweenCoordinates, int homeSensorPort, int
         throw invalid_argument("homeSensorPort cannot be less than 0 or greater than 5");
     }
 
-    if (edgeSensorPort < 0 || edgeSensorPort > 5)
+    if (emergencySensorPort < 0 || emergencySensorPort > 5)
     {
-        throw invalid_argument("edgeSensorPort cannot be less than 0 or greater than 5");
+        throw invalid_argument("emergencySensorPort cannot be less than 0 or greater than 5");
     }
 
     this->_motorPort = motorPort;
     this->_ticksBetweenCoordinates = ticksBetweenCoordinates;
 
     this->_homeSensorPort = homeSensorPort;
-    this->_edgeSensorPort = edgeSensorPort;
-
-    // TODO: Need to be determined
     this->_correctHomeSensorValue = 200;
-    this->_correctEdgeSensorValue = 200;
+
+    this->_emergencySensorPort = emergencySensorPort;
 }
 
 void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
 {
-    int sensorPortToUse = this->_edgeSensorPort;
-    int sensorValueToUse = this->_correctEdgeSensorValue;
-    if (ticks < 0)
-    {
-        sensorPortToUse = this->_homeSensorPort;
-        sensorValueToUse = this->_correctHomeSensorValue;
-        velocity *= -1;
-    }
-
     int expectedTotalTickCounter = this->_totalTicksCount + ticks;
-    while (get_motor_position_counter != expectedTotalTickCounter)
+    while (get_motor_position_counter(this->_motorPort) != expectedTotalTickCounter)
     {
         this->PowerMotor(velocity);
 
-        if (analog(sensorPortToUse) < sensorValueToUSe)
+        if (analog(this->_homeSensorPort) < this->_correctHomeSensorValue
+            || digital(this->_emergencySensorPort))
         {
             this->StopMotor();
             throw motor_exception("Failed when moving motor as it reached edge and wanted to still move");

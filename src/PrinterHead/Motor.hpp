@@ -4,7 +4,7 @@
 class Motor
 {
     public:
-        Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int edgeSensorPort);
+        Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int emergencySensorPort);
 
         void PowerMotorForNumberOfTicks(int velocity, int ticks);
         int ConvertLocationToMoveToTicks(int location);
@@ -16,9 +16,8 @@ class Motor
         int _motorPort;
         int _ticksBetweenCoordinates;
         int _homeSensorPort;
-        int _edgeSensorPort;
         int _correctHomeSensorValue;
-        int _correctEdgeSensorValue;
+        int _emergencySensorPort;
 
         void PowerMotor(int power);
         void PowerMotorAtVelocity(int velocity);

@@ -14,6 +14,8 @@
 #include <stdlib.h>
 
 #define BUMPER_PORT 0
+#define XHOME_SENSOR_PORT 0
+#define YHOME_SENSOR_PORT 1
 #define XMOTOR_PORT 0
 #define YMOTOR_PORT 1
 #define PRINTERHEAD_PORT 2
@@ -37,8 +39,8 @@ int main(int argc, char ** argv)
 
     // Initialize all classes here
 
-    Motor xMotor = Motor(XMOTOR_PORT, CM_BETWEEN_COORDINATES);
-    Motor yMotor = Motor(YMOTOR_PORT, CM_BETWEEN_COORDINATES);
+    Motor xMotor = Motor(XMOTOR_PORT, CM_BETWEEN_COORDINATES, XHOME_SENSOR_PORT, BUMPER_PORT);
+    Motor yMotor = Motor(YMOTOR_PORT, CM_BETWEEN_COORDINATES, YHOME_SENSOR_PORT, BUMPER_PORT);
     PrinterHead printerHead = PrinterHead(xMotor, yMotor, PRINTERHEAD_PORT);
 
     int colorChannels[] = { (int)Colors.Blue, (int)Colors.Red, (int)Colors.Yellow, (int)Colors.Green };

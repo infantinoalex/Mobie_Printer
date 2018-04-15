@@ -20,8 +20,8 @@ class PrinterHead
         int _printerHeadPort;
         bool _isLowered;
 
-        static int _maxServoPosition = 2097;
-        static int _minServoPosition = 0;
+        int _maxServoPosition;
+        int _minServoPosition;
 };
 
 #endif

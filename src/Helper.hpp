@@ -2,6 +2,7 @@
 #define HELPER_HPP
 
 #include "Image/Colors.hpp"
+#include "Image/Image.hpp"
 
 #include <string>
 
@@ -13,7 +14,7 @@ static std::string ConvertColorToString(int color)
 
 static Image GetBlueSquareImage()
 {
-    unsigned int squareImage[];
+    unsigned int squareImage[] = { 0 };
     int width;
     int height;
     Image BlueSquare = Image();
@@ -23,7 +24,7 @@ static Image GetBlueSquareImage()
 
 static Image GetRedCircleImage()
 {
-    unsigned int circleImage[];
+    unsigned int circleImage[] = { 0 };
     int width;
     int height;
     Image RedCircle = Image();

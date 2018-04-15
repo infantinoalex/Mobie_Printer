@@ -26,6 +26,9 @@ PrinterHead::PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort)
     this->_yMotor = yMotor;
 
     this->_isLowered = false;
+
+    this->_minServoPosition = 0;
+    this->_maxServoPosition = 2097;
 }
 
 void PrinterHead::LowerPrinter()

@@ -3,13 +3,11 @@
 
 class Motor
 {
-    // TODO: Add sensor port to help determine if motor has gone too far or if it has reached its home position
     public:
-        Motor(int motorPort, int ticksBetweenCoordinates);
+        Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int edgeSensorPort);
 
         void PowerMotorForNumberOfTicks(int velocity, int ticks);
         int ConvertLocationToMoveToTicks(int location);
-        void ClearMotorTicks();
         void MoveHome();
 
     private:
@@ -17,10 +15,15 @@ class Motor
         int _lastTicksCount;
         int _motorPort;
         int _ticksBetweenCoordinates;
+        int _homeSensorPort;
+        int _edgeSensorPort;
+        int _correctHomeSensorValue;
+        int _correctEdgeSensorValue;
 
         void PowerMotor(int power);
         void PowerMotorAtVelocity(int velocity);
         void StopMotor();
+        void ClearMotorTicks();
 };
 
 #endif

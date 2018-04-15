@@ -1,32 +1,66 @@
 #include "Motor.hpp"
+#include "../Exceptions/CustomExceptions.hpp"
 
 #include <kipr/botball.h>
 #include <stdexcept>
 
-Motor::Motor(int motorPort. int ticksBetweenCoordinates)
+Motor::Motor(int motorPort. int ticksBetweenCoordinates, int homeSensorPort, int edgeSensorPort)
 {
     if (motorPort < 0 || motorPort > 5)
     {
-        throw new invalid_argument("motorPort cannot be less than 0 or greater than 5")
+        throw invalid_argument("motorPort cannot be less than 0 or greater than 5");
     }
 
     if (ticksBetweenCoordinates < 0)
     {
-        throw new invalid_argument("ticksBetweenCoordinates cannot be less than 0.")
+        throw invalid_argument("ticksBetweenCoordinates cannot be less than 0.");
+    }
+
+    if (homeSensorPort < 0 || homeSensorPort > 5)
+    {
+        throw invalid_argument("homeSensorPort cannot be less than 0 or greater than 5");
+    }
+
+    if (edgeSensorPort < 0 || edgeSensorPort > 5)
+    {
+        throw invalid_argument("edgeSensorPort cannot be less than 0 or greater than 5");
     }
 
     this->_motorPort = motorPort;
     this->_ticksBetweenCoordinates = ticksBetweenCoordinates;
+
+    this->_homeSensorPort = homeSensorPort;
+    this->_edgeSensorPort = edgeSensorPort;
+
+    // TODO: Need to be determined
+    this->_correctHomeSensorValue = 200;
+    this->_correctEdgeSensorValue = 200;
 }
 
 void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
 {
-    // TODO: while (if ticks is negative, move while home sensor not hit)
-    // if ticks is positive, move while target sensor is not hit
-    // If sensor is hit, throw motor moving exception
-    mrp(this->_motorPort, velocity, ticks);
-    this->_totalTicksCount = get_motor_position_counter(this->_motorPort);
-    this->_lastTicksCount = this->_totalTicksCount - this->_lastTicksCount;
+    int sensorPortToUse = this->_edgeSensorPort;
+    int sensorValueToUse = this->_correctEdgeSensorValue;
+    if (ticks < 0)
+    {
+        sensorPortToUse = this->_homeSensorPort;
+        sensorValueToUse = this->_correctHomeSensorValue;
+        velocity *= -1;
+    }
+
+    int expectedTotalTickCounter = this->_totalTicksCount + ticks;
+    while (get_motor_position_counter != expectedTotalTickCounter)
+    {
+        this->PowerMotor(velocity);
+
+        if (analog(sensorPortToUse) < sensorValueToUSe)
+        {
+            this->StopMotor();
+            throw motor_exception("Failed when moving motor as it reached edge and wanted to still move");
+        }
+    }
+
+    this->StopMotor();
 }
 
 int Motor::ConvertLocationToMoveToTicks(int location)
@@ -41,9 +75,13 @@ int Motor::ConvertLocationToMoveToTicks(int location)
 
 void Motor::MoveHome()
 {
-    // TODO: while sensor not hit, move negative
-    // once sensor hit return
-    throw not_implemented_exception("MoveHome not implemented yet.")
+    while (analog(this->_homeSensorPort) < this->_correctHomeSensorValue)
+    {
+        this->PowerMotor(1);
+    }
+
+    this->StopMotor();
+    this->ClearMotorTicks();
 }
 
 void Motor::ClearMotorTicks()

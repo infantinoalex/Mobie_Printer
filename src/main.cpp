@@ -18,6 +18,7 @@
 #define YMOTOR_PORT 1
 #define PRINTERHEAD_PORT 2
 #define NUMOFCOLORS 4
+#define CM_BETWEEN_COORDINATES 2
 
 static std::map<Colors, Image> CreateShapeImages()
 {
@@ -36,8 +37,8 @@ int main(int argc, char ** argv)
 
     // Initialize all classes here
 
-    Motor xMotor = Motor(XMOTOR_PORT);
-    Motor yMotor = Motor(YMOTOR_PORT);
+    Motor xMotor = Motor(XMOTOR_PORT, CM_BETWEEN_COORDINATES);
+    Motor yMotor = Motor(YMOTOR_PORT, CM_BETWEEN_COORDINATES);
     PrinterHead printerHead = PrinterHead(xMotor, yMotor, PRINTERHEAD_PORT);
 
     int colorChannels[] = { (int)Colors.Blue, (int)Colors.Red, (int)Colors.Yellow, (int)Colors.Green };

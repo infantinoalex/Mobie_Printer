@@ -65,6 +65,7 @@ void Controller::DrawImage()
                     this->_printerHead.RaisePrinter();
                 }
 
+                std::cout << "Drawing at location X: " << widthLoop << "\tY: " << heightLoop << std::endl;
                 if (!TryMovePrinterHead(widthLoop, heightLoop))
                 {
                     throw drawing_exception("Could not move printer head to location.")

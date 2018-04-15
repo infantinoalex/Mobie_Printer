@@ -2,6 +2,7 @@
 #include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>
+#include <iostream>
 
 PrinterHead::PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort)
 {
@@ -63,7 +64,10 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 {
     try
     {
-        int yDirectionToTicks this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
+        int yDirectionToTicks = this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
+
+        std::cout << "Y Ticks: " << yDirectionToTicks << std::endl;
+
         this->_yMotor.PowerMotorForNumberOfTicks(5, yDirectionToTicks);
     }
     catch (motor_exception exception)
@@ -74,6 +78,9 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     try
     {
         int xDirectionToTicks = this->_xMotor.ConvertLocationToMoveToTicks(xDirectionToMove);
+
+        std::cout << "X Ticks: " << xDirectionToTicks << std::endl;
+
         this->_xMotor.PowerMotorForNumberOfTicks(5, xDirectionToTicks);
     }
     catch(motor_exception exception)

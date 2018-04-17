@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <map>
 
-class ColorImageConverter : ImageConverter
+class ColorImageConverter : public ImageConverter
 {
     public:
         ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages);

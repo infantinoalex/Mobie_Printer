@@ -1,27 +1,19 @@
 #include "ColorImageConverter.hpp"
 #include "Colors.hpp"
-#include "../Helper.hpp"
+#include "../Helper.cpp"
+#include "../Exception/CustomExceptions.cpp"
 
 #include <stdexcept>
+#include <kipr/botball.h>
+#include <iostream>
 
-// Constructor that initialiazes the color channels to listen to and the color images
 ColorImageConverter::ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages)
 {
-    if (colorChannels == NULL)
-    {
-        throw new invalid_argument("colorChannels cannot be NULL");
-    }
-
-    if (colorImages == NULL)
-    {
-        throw new invalid_argument("colorImages cannot be NULL")
-    }
-
     this->_colorChannels = _colorChannels;
     this->_colorImages = colorImages;
 }
 
-virtual Image ColorImageConverter::GrabAndConvertImage()
+Image ColorImageConverter::GrabAndConvertImage()
 {
     int loops = 0;
     while(true)
@@ -30,7 +22,7 @@ virtual Image ColorImageConverter::GrabAndConvertImage()
         {
             camera_close();
 
-            throw new camera_exception("Camera could not find image in alloted time.");
+            throw camera_exception("Camera could not find image in alloted time.");
         }
 
         int i;
@@ -46,9 +38,10 @@ virtual Image ColorImageConverter::GrabAndConvertImage()
             {
                 camera_close();
 
-                std::cout << "Found color " << ConvertColorToString(i) << "on screen. Converting to image." >> std::endl;
+                std::cout << "Found color " << ConvertColorToString(i) << "on screen. Converting to image." << std::endl;
 
-                return this->_colorImages.find((Colors)i);
+		Colors colorValue = static_cast<Colors>(i);
+                return this->_colorImages[colorValue];
             }
         }
 

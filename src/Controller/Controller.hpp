@@ -4,7 +4,6 @@
 #include "../Image/Image.hpp"
 #include "../Image/ImageConverter.hpp"
 #include "../PrinterHead/PrinterHead.hpp"
-#include "../Exception/CustomExceptions.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -13,12 +12,14 @@
 class Controller
 {
     public:
-        Controller(int bumperPort, ImageConverter ImageConverter, PrinterHead printerHead);
-        ~Controller();
+        Controller();
+        Controller(int bumperPort, ImageConverter &imageConverter, PrinterHead &printerHead);
+	~Controller();
 
         bool IsStartBumperHit();
         void GrabAndConvertImageData();
         void DrawImage();
+	void operator = (const Controller &controller);
 
     private:
         Image _image;

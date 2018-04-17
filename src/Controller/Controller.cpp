@@ -1,20 +1,15 @@
 #include "Controller.hpp"
+#include "../Exception/CustomExceptions.cpp"
 
-Controller::Controller(int bumperPort, ImageConverter ImageConverter, PrinterHead printerHead)
+Controller::Controller()
+{
+}
+
+Controller::Controller(int bumperPort, ImageConverter &imageConverter, PrinterHead &printerHead)
 {
     if (bumperPort < 0 || bumperPort > 5)
     {
-        throw invalid_argument("The provided bumper port must be between 0 - 5.")
-    }
-
-    if (imageConverter == NULL)
-    {
-        throw invalid_argument("The image must not be NULL.")
-    }
-
-    if (printerHead == NULL)
-    {
-        throw invalid_argument("The printer head must not be NULL.")
+        throw std::invalid_argument("The provided bumper port must be between 0 - 5.");
     }
 
     this->_bumperPort = bumperPort;
@@ -55,7 +50,7 @@ void Controller::DrawImage()
         {
             for (int widthLoop = 0; widthLoop < width; ++widthLoop)
             {
-                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, indexLoop);
+                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, heightLoop);
                 if (pixelValue)
                 {
                     this->_printerHead.LowerPrinter();
@@ -66,9 +61,9 @@ void Controller::DrawImage()
                 }
 
                 std::cout << "Drawing at location X: " << widthLoop << "\tY: " << heightLoop << std::endl;
-                if (!TryMovePrinterHead(widthLoop, heightLoop))
+                if (!this->_printerHead.TryMovePrinterHead(widthLoop, heightLoop))
                 {
-                    throw drawing_exception("Could not move printer head to location.")
+                    throw drawing_exception("Could not move printer head to location.");
                 }
             }
         }
@@ -76,7 +71,7 @@ void Controller::DrawImage()
         {
             for (int widthLoop = width - 1; widthLoop > -1; --widthLoop)
             {
-                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, indexLoop);
+                int pixelValue = this->_image.GetImagePixelAtIndex(widthLoop, heightLoop);
                 if (pixelValue)
                 {
                     this->_printerHead.LowerPrinter();
@@ -86,11 +81,18 @@ void Controller::DrawImage()
                     this->_printerHead.RaisePrinter();
                 }
 
-                if (!TryMovePrinterHead(widthLoop, heightLoop))
+                if (!this->_printerHead.TryMovePrinterHead(widthLoop, heightLoop))
                 {
-                    throw drawing_exception("Could not move printer head to location.")
+                    throw drawing_exception("Could not move printer head to location.");
                 }
             }
         }
     }
+}
+
+void Controller::operator= (const Controller &controller)
+{
+	this->_bumperPort = controller._bumperPort;
+	this->_printerHead = controller._printerHead;
+	this->_imageConverter = controller._imageConverter;	
 }

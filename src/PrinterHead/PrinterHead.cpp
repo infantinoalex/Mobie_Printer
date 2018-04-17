@@ -4,6 +4,10 @@
 #include <stdexcept>
 #include <iostream>
 
+PrinterHead::PrinterHead()
+{
+}
+
 PrinterHead::PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort)
 {
     if (printerHeadPort < 0 || printerHeadPort > 5)
@@ -95,4 +99,18 @@ void PrinterHead::MovePrinterHeadHome()
 {
     this->_xMotor.MoveHome();
     this->_yMotor.MoveHome();
+}
+
+void PrinterHead::operator= (const PrinterHead &printerHead)
+{
+    this->_printerHeadPort = printerHead._printerHeadPort;
+
+    this->_xMotor = printerHead._xMotor;
+    this->_yMotor = printerHead._yMotor;
+
+    this->_isLowered = printerHead._isLowered;
+
+    this->_minServoPosition = printerHead._minServoPosition;
+    this->_maxServoPosition = printerHead._maxServoPosition;
+
 }

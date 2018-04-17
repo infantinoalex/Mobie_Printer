@@ -1,5 +1,7 @@
 #include "Exception/CustomExceptions.hpp"
 #include "Image/Image.hpp"
+#include "Image/ImageConverter.hpp"
+#include "Image/ColorImageConverter.hpp"
 #include "Controller/Controller.hpp"
 #include "Helper.hpp"
 #include "Image/Colors.hpp"
@@ -26,8 +28,8 @@ static std::map<Colors, Image> CreateShapeImages()
 {
     std::map<Colors, Image> colorMap = std::map<Colors, Image>();
 
-    colorMap.insert(std::pair<Colors, Image>(Colors.Blue, GetBlueSquareImage()));
-    colorMap.insert(std::pair<Colors, Image>(Colors.Red, GetRedCircleImage()));
+    colorMap.insert(std::pair<Colors, Image>(Blue, GetBlueSquareImage()));
+    colorMap.insert(std::pair<Colors, Image>(Red, GetRedCircleImage()));
 
     return colorMap;
 }
@@ -43,7 +45,7 @@ int main(int argc, char ** argv)
     Motor yMotor = Motor(YMOTOR_PORT, CM_BETWEEN_COORDINATES, YHOME_SENSOR_PORT, BUMPER_PORT);
     PrinterHead printerHead = PrinterHead(xMotor, yMotor, PRINTERHEAD_PORT);
 
-    int colorChannels[] = { (int)Colors.Blue, (int)Colors.Red, (int)Colors.Yellow, (int)Colors.Green };
+    int colorChannels[] = { (int)Blue, (int)Red, (int)Yellow, (int)Green };
 
     std::map<Colors, Image> colorsMap = CreateShapeImages();
     ImageConverter imageConverter = ColorImageConverter(colorChannels, colorsMap);

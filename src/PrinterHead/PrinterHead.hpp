@@ -6,16 +6,13 @@
 class PrinterHead
 {
     public:
-	PrinterHead();
-        PrinterHead(Motor xMotor, Motor yMotor, int printerHeadPort);
+        PrinterHead();
 
         void LowerPrinter();
         void RaisePrinter();
 
         bool TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove);
         void MovePrinterHeadHome();
-
-	void operator=(const PrinterHead &printerHead);
 
     private:
         Motor _xMotor;

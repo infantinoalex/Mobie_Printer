@@ -4,6 +4,7 @@
 class Motor
 {
     public:
+	Motor();
         Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int emergencySensorPort);
 
         void PowerMotorForNumberOfTicks(int velocity, int ticks);

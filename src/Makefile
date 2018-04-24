@@ -1,4 +1,4 @@
-CC = gcc
+CC = g++
 
 Printer: Controller.o CustomExceptions.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
 	$(CC) -o Printer main.o CustomExceptions.o Motor.o PrinterHead.o Image.o ColorImageConverter.o Controller.o Helper.o

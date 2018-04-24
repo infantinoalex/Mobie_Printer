@@ -5,12 +5,7 @@
 #include "Image/Image.hpp"
 
 #include <string>
-
-static std::string ConvertColorToString(int color)
-{
-    std::string strings[] = { "Blue", "Red", "Yellow", "Green" };
-    return strings[color];
-}
+#include <map>
 
 static Image GetBlueSquareImage()
 {
@@ -264,6 +259,22 @@ static Image GetRedCircleImage()
     Image RedCircle = Image();
     RedCircle.SetImage(circleImage, width, height);
     return RedCircle;
+}
+
+static std::map<Colors, Image> CreateShapeImages()
+{
+    std::map<Colors, Image> colorMap = std::map<Colors, Image>();
+
+    colorMap.insert(std::pair<Colors, Image>(Blue, GetBlueSquareImage()));
+    colorMap.insert(std::pair<Colors, Image>(Red, GetRedCircleImage()));
+
+    return colorMap;
+}
+
+static std::string ConvertColorToString(int color)
+{
+    std::string strings[] = { "Blue", "Red", "Yellow", "Green" };
+    return strings[color];
 }
 
 #endif

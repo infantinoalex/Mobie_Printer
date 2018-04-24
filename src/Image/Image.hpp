@@ -19,7 +19,7 @@ class Image
         unsigned int GetImagePixelAtIndex(int indexX, int indexY);
 
     private:
-        unsigned int _image[];
+        unsigned int * _image;
         int _width;
         int _height;
 };

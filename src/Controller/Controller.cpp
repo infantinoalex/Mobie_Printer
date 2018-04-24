@@ -1,20 +1,20 @@
 #include "Controller.hpp"
 #include "../Exception/CustomExceptions.cpp"
+#include "../Helper.cpp"
+#include "../Image/ColorImageConverter.hpp"
+
+#define BUMPER_PORT 0
 
 Controller::Controller()
 {
-}
+    this->_printerHead = PrinterHead();
 
-Controller::Controller(int bumperPort, ImageConverter &imageConverter, PrinterHead &printerHead)
-{
-    if (bumperPort < 0 || bumperPort > 5)
-    {
-        throw std::invalid_argument("The provided bumper port must be between 0 - 5.");
-    }
+    this->_bumperPort = BUMPER_PORT;
 
-    this->_bumperPort = bumperPort;
-    this->_imageConverter = imageConverter;
-    this->_printerHead = printerHead;
+    int colorChannels[] = { (int)Blue, (int)Red, (int)Yellow, (int)Green };
+
+    std::map<Colors, Image> colorsMap = CreateShapeImages();
+    this->_imageConverter = ColorImageConverter(colorChannels, colorsMap);
 }
 
 bool Controller::IsStartBumperHit()
@@ -88,11 +88,4 @@ void Controller::DrawImage()
             }
         }
     }
-}
-
-void Controller::operator= (const Controller &controller)
-{
-	this->_bumperPort = controller._bumperPort;
-	this->_printerHead = controller._printerHead;
-	this->_imageConverter = controller._imageConverter;	
 }

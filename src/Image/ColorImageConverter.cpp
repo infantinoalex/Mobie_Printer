@@ -6,11 +6,15 @@
 #include <stdexcept>
 #include <kipr/botball.h>
 #include <iostream>
+#include <algorithm>
+#include <iterator>
 
 ColorImageConverter::ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages)
 {
-    this->_colorChannels = _colorChannels;
-    this->_colorImages = colorImages;
+    this->_colorImages = _colorImages;
+
+    int numOfElements = sizeof(colorChannels) / sizeof(int);
+    std::copy(colorChannels, colorChannels + numOfElements, this->_colorChannels);
 }
 
 Image ColorImageConverter::GrabAndConvertImage()

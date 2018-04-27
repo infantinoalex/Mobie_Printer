@@ -37,16 +37,20 @@ Motor::Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int
 
 void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
 {
+    if (ticks < 0)
+    {
+        velocity *= -1;
+    }
+
     int expectedTotalTickCounter = this->_totalTicks + ticks;
     while (get_motor_position_counter(this->_motorPort) != expectedTotalTickCounter)
     {
         this->PowerMotor(velocity);
 
-        if (analog(this->_homeSensorPort) < this->_correctHomeSensorValue
-            || digital(this->_emergencySensorPort))
+        if (digital(this->_emergencySensorPort))
         {
             this->StopMotor();
-            throw motor_exception("Failed when moving motor as it reached edge and wanted to still move");
+            throw motor_exception("Failed when moving motor as the emergency stop button was it");
         }
     }
 

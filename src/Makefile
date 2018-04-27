@@ -1,7 +1,10 @@
 CC = g++
 
-Printer: Controller.o CustomExceptions.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
-	$(CC) -o Printer main.o CustomExceptions.o Motor.o PrinterHead.o Image.o ColorImageConverter.o Controller.o Helper.o
+#Printer: Controller.o CustomExceptions.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
+#	$(CC) -o Printer main.o CustomExceptions.o Motor.o PrinterHead.o Image.o ColorImageConverter.o Controller.o Helper.o -lwallaby
+
+Printer:
+	$(CC) main.cpp Exception/CustomExceptions.cpp PrinterHead/Motor.cpp PrinterHead/PrinterHead.cpp Image/Image.cpp Image/ColorImageConverter.cpp Controller/Controller.cpp Helper.cpp Image/Colors.hpp -o Printer
 
 main.o: main.cpp
 	$(CC) -c main.cpp

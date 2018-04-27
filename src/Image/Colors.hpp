@@ -1,6 +1,9 @@
 #ifndef COLORS_HPP
 #define COLORS_HPP
 
+/*
+ * Simple enumarations used to make it easier to deal with colors
+ */
 enum Colors
 {
     Blue = 0,

@@ -7,6 +7,12 @@
 #include <string>
 #include <map>
 
+/*
+ * Contains static functions that are used throughout the program to make life easier.
+ */
+
+// When the camera sees a blue image and we are using the ColorImageConverter, will call this function which returns an image object
+// containing the correct values to draw a square.
 static Image GetBlueSquareImage()
 {
     unsigned int squareImage[] = 
@@ -134,6 +140,8 @@ static Image GetBlueSquareImage()
     return BlueSquare;
 }
 
+// When the camera sees a red image and we are using the ColorImageConverter, will call this function which returns an image object
+// containing the correct values to draw a circle
 static Image GetRedCircleImage()
 {
     unsigned int circleImage[] =

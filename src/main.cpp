@@ -1,12 +1,6 @@
 #include "Exception/CustomExceptions.cpp"
-#include "Image/Image.hpp"
-#include "Image/ImageConverter.hpp"
-#include "Image/ColorImageConverter.hpp"
 #include "Controller/Controller.hpp"
 #include "Helper.cpp"
-#include "Image/Colors.hpp"
-#include "PrinterHead/PrinterHead.hpp"
-#include "PrinterHead/Motor.hpp"
 
 #include <iostream>
 #include <fstream>

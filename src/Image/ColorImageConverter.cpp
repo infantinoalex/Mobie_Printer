@@ -9,6 +9,10 @@
 #include <algorithm>
 #include <iterator>
 
+ColorImageConverter::ColorImageConverter()
+{
+}
+
 ColorImageConverter::ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages)
 {
     this->_colorImages = _colorImages;
@@ -26,7 +30,7 @@ Image ColorImageConverter::GrabAndConvertImage()
         {
             camera_close();
 
-            throw camera_exception("Camera could not find image in alloted time.");
+            throw std::runtime_error("Camera could not find image in alloted time.");
         }
 
         int i;

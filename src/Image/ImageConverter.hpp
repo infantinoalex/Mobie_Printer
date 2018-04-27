@@ -11,7 +11,7 @@ class ImageConverter
 {
     public:
         // Grabs frames from the camera and created an Image object from them.
-        virtual Image GrabAndConvertImage();
+        Image GrabAndConvertImage();
 };
 
 #endif

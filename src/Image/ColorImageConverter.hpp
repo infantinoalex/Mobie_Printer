@@ -11,14 +11,14 @@
  * Will poll the camera for simple colors and based upon there values, grab a predetermined object from the map that is
  * passed to it via its constructor.
  */
-class ColorImageConverter : public ImageConverter
+class ColorImageConverter
 {
     public:
+	ColorImageConverter();
         ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages);
-        ~ColorImageConverter();
 
         // Ovwritten to grab a pretermined image based upon a color.
-        virtual Image GrabAndConvertImage();
+        Image GrabAndConvertImage();
 
     private:
         // The current color channels setup on the wallaby.

@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 #include "../Image/Image.hpp"
-#include "../Image/ImageConverter.hpp"
+#include "../Image/ColorImageConverter.hpp"
 #include "../PrinterHead/PrinterHead.hpp"
 
 #include <stdexcept>
@@ -20,7 +20,6 @@ class Controller
 {
     public:
         Controller();
-	~Controller();
 
         // Method that polls the port connected to the bumper.
         // Returns
@@ -41,7 +40,7 @@ class Controller
         Image _image;
 
         // Used to convert what the camera sees to an image
-        ImageConverter _imageConverter;
+        ColorImageConverter _imageConverter;
 
         // The printer head object which controls the motors/pen for drawing
         PrinterHead _printerHead;

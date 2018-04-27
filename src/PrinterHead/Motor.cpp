@@ -4,6 +4,10 @@
 #include <kipr/botball.h>
 #include <stdexcept>
 
+Motor::Motor()
+{
+}
+
 Motor::Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int emergencySensorPort)
 {
     if (motorPort < 0 || motorPort > 5)
@@ -43,14 +47,14 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
     }
 
     int expectedTotalTickCounter = this->_totalTicks + ticks;
+    mrp(this->_motorPort, velocity, ticks);
+
     while (get_motor_position_counter(this->_motorPort) != expectedTotalTickCounter)
     {
-        this->PowerMotor(velocity);
-
         if (digital(this->_emergencySensorPort))
         {
             this->StopMotor();
-            throw motor_exception("Failed when moving motor as the emergency stop button was it");
+            throw std::runtime_error("Failed when moving motor as the emergency stop button was it");
         }
     }
 
@@ -71,7 +75,7 @@ void Motor::MoveHome()
 {
     while (analog(this->_homeSensorPort) < this->_correctHomeSensorValue)
     {
-        this->PowerMotor(1);
+        motor(this->_motorPort, -1);
     }
 
     this->StopMotor();
@@ -83,16 +87,6 @@ void Motor::ClearMotorTicks()
     clear_motor_position_counter(this->_motorPort);
     this->_totalTicks = 0;
     this->_lastTicksCount = 0;
-}
-
-void Motor::PowerMotor(int power)
-{
-    motor_power(this->_motorPort, power);
-}
-
-void Motor::PowerMotorAtVelocity(int velocity)
-{
-    motor(this->_motorPort, velocity);
 }
 
 void Motor::StopMotor()

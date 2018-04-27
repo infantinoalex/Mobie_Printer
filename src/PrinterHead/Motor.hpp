@@ -41,8 +41,6 @@ class Motor
         // The emergency sensor used to stop the motor.
         int _emergencySensorPort;
 
-        void PowerMotor(int power);
-        void PowerMotorAtVelocity(int velocity);
         void StopMotor();
         void ClearMotorTicks();
 };

@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <stdlib.h>
+#include <iostream>
 
 // Default constructor that initializes everything to NULL or 0
 Image::Image()
@@ -27,17 +28,12 @@ Image::Image(int width, int height)
     this->_width = width;
     this->_height = height;
 
-    this->_image = new unsigned int [this->_width * this->_height];
-}
-
-// Deletes the array
-Image::~Image()
-{
-    delete [] this->_image;
+    unsigned int testArray[width * height] = {0};
+    this->_image = std::vector<unsigned int>(testArray, testArray + sizeof(testArray) / sizeof(testArray[0]));
 }
 
 // Sets the image based on the provided arguments
-void Image::SetImage(unsigned int image[], int width, int height)
+void Image::SetImage(std::vector<unsigned int> image, int width, int height)
 {
     if (width <= 0)
     {
@@ -51,11 +47,8 @@ void Image::SetImage(unsigned int image[], int width, int height)
 
     this->_width = width;
     this->_height = height;
-
-    int numOfElements = width * height;
-    delete [] this->_image;
-    this->_image = new unsigned int [numOfElements];
-    std::copy(image, image + numOfElements, this->_image);
+    
+    this->_image = image;
 }
 
 // Sets the value of a pixel at a given index in the array

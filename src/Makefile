@@ -1,7 +1,7 @@
 CC = g++
 
 Printer: Controller.o CustomExceptions.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
-	$(CC) -o Printer main.o CustomExceptions.o Motor.o PrinterHead.o Image.o Helper.o ColorImageConverter.o Controller.o -lwallaby
+	$(CC) -o botball_user_program main.o CustomExceptions.o Motor.o PrinterHead.o Image.o Helper.o ColorImageConverter.o Controller.o -lwallaby
 
 main.o: main.cpp
 	$(CC) -c main.cpp
@@ -29,4 +29,4 @@ PrinterHead.o: PrinterHead/PrinterHead.cpp PrinterHead/PrinterHead.hpp PrinterHe
 
 
 clean:
-	rm Printer *.o
+	rm botball_user_program *.o

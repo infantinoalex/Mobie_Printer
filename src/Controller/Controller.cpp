@@ -3,6 +3,8 @@
 #include "../Helper.cpp"
 #include "../Image/ColorImageConverter.hpp"
 
+#include <iostream>
+
 #define BUMPER_PORT 0
 
 Controller::Controller()
@@ -11,10 +13,8 @@ Controller::Controller()
 
     this->_bumperPort = BUMPER_PORT;
 
-    int colorChannels[] = { (int)Blue, (int)Red, (int)Yellow, (int)Green };
-
     std::map<Colors, Image> colorsMap = CreateShapeImages();
-    this->_imageConverter = ColorImageConverter(colorChannels, colorsMap);
+    this->_imageConverter = ColorImageConverter(colorsMap);
 }
 
 bool Controller::IsStartBumperHit()

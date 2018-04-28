@@ -3,6 +3,7 @@
 
 #include <kipr/botball.h>
 #include <stdexcept>
+#include <iostream>
 
 Motor::Motor()
 {

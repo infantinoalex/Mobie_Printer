@@ -1,6 +1,8 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
+#include <vector>
+
 /*
  * Internal representation of an image that is usable with the drawing algorithm.
  * Uses a bit array (values of 1 or 0) to determine if an image is white space (0) or black
@@ -11,10 +13,9 @@ class Image
     public:
         Image();
         Image(int width, int height);
-        ~Image();
 
         // Sets this image to the passed image object.
-        void SetImage(unsigned int image[], int width, int height);
+        void SetImage(std::vector<unsigned int> image, int width, int height);
 
         // Sets the value of the bit of the pixel of the image at the x, y coordinate provided.
         void SetImagePixelAtIndex(int indexX, int indexY, unsigned int pixel);
@@ -30,7 +31,7 @@ class Image
 
     private:
         // The 1-D array representation of the image.
-        unsigned int * _image;
+	std::vector<unsigned int> _image;
 
         // The width of the image.
         int _width;

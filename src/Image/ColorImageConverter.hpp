@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <map>
+#include <vector>
 
 /*
  * Will poll the camera for simple colors and based upon there values, grab a predetermined object from the map that is
@@ -15,14 +16,14 @@ class ColorImageConverter
 {
     public:
 	ColorImageConverter();
-        ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages);
+        ColorImageConverter(std::map<Colors, Image> colorImages);
 
         // Ovwritten to grab a pretermined image based upon a color.
         Image GrabAndConvertImage();
 
     private:
         // The current color channels setup on the wallaby.
-        int _colorChannels[];
+	std::vector<int> _colorChannels;
 
         // A map used to map an Color to an Image
         std::map<Colors, Image> _colorImages;

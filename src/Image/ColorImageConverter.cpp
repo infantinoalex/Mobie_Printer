@@ -8,17 +8,18 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <iostream>
 
 ColorImageConverter::ColorImageConverter()
 {
 }
 
-ColorImageConverter::ColorImageConverter(int colorChannels[], std::map<Colors, Image> colorImages)
+ColorImageConverter::ColorImageConverter(std::map<Colors, Image> colorImages)
 {
-    this->_colorImages = _colorImages;
+    int colorChannelsArray[] = { (int)Blue, (int)Red, (int)Yellow, (int)Green };
 
-    int numOfElements = sizeof(colorChannels) / sizeof(int);
-    std::copy(colorChannels, colorChannels + numOfElements, this->_colorChannels);
+    this->_colorChannels = std::vector<int>(colorChannelsArray, colorChannelsArray + sizeof(colorChannelsArray) / sizeof(colorChannelsArray[0]));
+    this->_colorImages = colorImages;
 }
 
 Image ColorImageConverter::GrabAndConvertImage()
@@ -26,7 +27,7 @@ Image ColorImageConverter::GrabAndConvertImage()
     int loops = 0;
     while(true)
     {
-        if (loops > 200)
+        if (loops > 2000)
         {
             camera_close();
 
@@ -37,9 +38,11 @@ Image ColorImageConverter::GrabAndConvertImage()
         int numberOfChannels = sizeof(this->_colorChannels) / sizeof(this->_colorChannels[0]);
        
         camera_open();
+	
+	std::cout << "Number of color channels" << numberOfChannels << std::endl;
 
         for (i = 0; i < numberOfChannels; ++i)
-        {
+	{
             while(!camera_update());
 
             if (get_object_count(this->_colorChannels[i]))
@@ -53,6 +56,7 @@ Image ColorImageConverter::GrabAndConvertImage()
             }
         }
 
+	msleep(100);
         loops++;
     }
 }

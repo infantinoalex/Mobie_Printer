@@ -11,7 +11,7 @@
 #define XMOTOR_PORT 0
 #define YMOTOR_PORT 1
 #define PRINTERHEAD_PORT 2
-#define TICKS_BETWEEN_COORDINATES 2
+#define TICKS_BETWEEN_COORDINATES 50
 
 PrinterHead::PrinterHead()
 {

@@ -60,8 +60,7 @@ void Controller::DrawImage()
                     this->_printerHead.RaisePrinter();
                 }
 
-                std::cout << "Drawing at location X: " << widthLoop << "\tY: " << heightLoop << std::endl;
-                if (!this->_printerHead.TryMovePrinterHead(widthLoop, heightLoop))
+                if (!this->_printerHead.TryMovePrinterHead(widthLoop + 1, heightLoop))
                 {
                     throw std::runtime_error("Could not move printer head to location.");
                 }
@@ -81,7 +80,7 @@ void Controller::DrawImage()
                     this->_printerHead.RaisePrinter();
                 }
 
-                if (!this->_printerHead.TryMovePrinterHead(widthLoop, heightLoop))
+                if (!this->_printerHead.TryMovePrinterHead(widthLoop + 1, heightLoop))
                 {
                     throw std::runtime_error("Could not move printer head to location.");
                 }

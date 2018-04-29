@@ -59,6 +59,7 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     try
     {
         int yDirectionToTicks = this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
+	std::cout << "Moving Y Direction" << std::endl;
         this->_yMotor.PowerMotorForNumberOfTicks(150, yDirectionToTicks);
     }
     catch (motor_exception exception)
@@ -69,7 +70,7 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     try
     {
         int xDirectionToTicks = this->_xMotor.ConvertLocationToMoveToTicks(xDirectionToMove);
-	std::cout << "X Direction: " << xDirectionToMove << "X Ticks: " << xDirectionToTicks << std::endl;
+	std::cout << "Moving X Direction" << std::endl;
         this->_xMotor.PowerMotorForNumberOfTicks(150, xDirectionToTicks);
     }
     catch(motor_exception exception)
@@ -82,6 +83,8 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 
 void PrinterHead::MovePrinterHeadHome()
 {
+    this->RaisePrinter();
+    
     this->_xMotor.MoveHome();
 
     msleep(1000);

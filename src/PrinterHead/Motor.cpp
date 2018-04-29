@@ -48,18 +48,18 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
     }
 
     int expectedTotalTickCounter = this->_totalTicks + ticks;
-    mrp(this->_motorPort, velocity, ticks);
+    mtp(this->_motorPort, velocity, expectedTotalTickCounter);
 
-    std::cout << "Expected: " << expectedTotalTickCounter << " Ticks to Move: " << ticks << " Current total ticks: " << this->_totalTicks << std::endl;
-
-    while (get_motor_position_counter(this->_motorPort) != expectedTotalTickCounter)
+    int motorPosition = 0;
+    do
     {
-        if (digital(this->_emergencySensorPort))
-        {
-            this->StopMotor();
-            throw std::runtime_error("Failed when moving motor as the emergency stop button was it");
-        }
-    }
+	motorPosition = get_motor_position_counter(this->_motorPort);
+	if (digital(this->_emergencySensorPort))
+	{
+	    this->StopMotor();
+	    throw std::runtime_error("Failed when moving motor as the emergency stop button was hit");
+	}
+    } while (motorPosition > expectedTotalTickCounter + 10 || motorPosition < expectedTotalTickCounter - 10);
 
     this->StopMotor();
 }
@@ -82,7 +82,6 @@ void Motor::MoveHome()
     }
 
     this->StopMotor();
-    msleep(100);
     this->ClearMotorTicks();
 }
 

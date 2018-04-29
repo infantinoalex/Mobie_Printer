@@ -21,12 +21,12 @@ Motor::Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int
         throw std::invalid_argument("ticksBetweenCoordinates cannot be less than 0.");
     }
 
-    if (homeSensorPort < 0 || homeSensorPort > 5)
+    if (homeSensorPort < 0 || homeSensorPort > 9)
     {
         throw std::invalid_argument("homeSensorPort cannot be less than 0 or greater than 5");
     }
 
-    if (emergencySensorPort < 0 || emergencySensorPort > 5)
+    if (emergencySensorPort < 0 || emergencySensorPort > 9)
     {
         throw std::invalid_argument("emergencySensorPort cannot be less than 0 or greater than 5");
     }
@@ -49,6 +49,8 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
 
     int expectedTotalTickCounter = this->_totalTicks + ticks;
     mrp(this->_motorPort, velocity, ticks);
+
+    std::cout << "Expected: " << expectedTotalTickCounter << " Ticks to Move: " << ticks << " Current total ticks: " << this->_totalTicks << std::endl;
 
     while (get_motor_position_counter(this->_motorPort) != expectedTotalTickCounter)
     {
@@ -74,12 +76,13 @@ int Motor::ConvertLocationToMoveToTicks(int location)
 
 void Motor::MoveHome()
 {
-    while (analog(this->_homeSensorPort) < this->_correctHomeSensorValue)
+    while (!digital(this->_homeSensorPort))
     {
-        motor(this->_motorPort, -1);
+        motor(this->_motorPort, -10);
     }
 
     this->StopMotor();
+    msleep(100);
     this->ClearMotorTicks();
 }
 

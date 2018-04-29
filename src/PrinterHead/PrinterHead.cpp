@@ -6,12 +6,12 @@
 #include <kipr/botball.h>
 
 #define BUMPER_PORT 0
-#define XHOME_SENSOR_PORT 0
-#define YHOME_SENSOR_PORT 1
-#define XMOTOR_PORT 0
-#define YMOTOR_PORT 1
-#define PRINTERHEAD_PORT 2
-#define TICKS_BETWEEN_COORDINATES 50
+#define XHOME_SENSOR_PORT 9
+#define YHOME_SENSOR_PORT 9
+#define XMOTOR_PORT 2
+#define YMOTOR_PORT 0
+#define PRINTERHEAD_PORT 3
+#define TICKS_BETWEEN_COORDINATES 200
 
 PrinterHead::PrinterHead()
 {
@@ -59,10 +59,7 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     try
     {
         int yDirectionToTicks = this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
-
-        std::cout << "Y Ticks: " << yDirectionToTicks << std::endl;
-
-        this->_yMotor.PowerMotorForNumberOfTicks(5, yDirectionToTicks);
+        this->_yMotor.PowerMotorForNumberOfTicks(150, yDirectionToTicks);
     }
     catch (motor_exception exception)
     {
@@ -72,10 +69,8 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     try
     {
         int xDirectionToTicks = this->_xMotor.ConvertLocationToMoveToTicks(xDirectionToMove);
-
-        std::cout << "X Ticks: " << xDirectionToTicks << std::endl;
-
-        this->_xMotor.PowerMotorForNumberOfTicks(5, xDirectionToTicks);
+	std::cout << "X Direction: " << xDirectionToMove << "X Ticks: " << xDirectionToTicks << std::endl;
+        this->_xMotor.PowerMotorForNumberOfTicks(150, xDirectionToTicks);
     }
     catch(motor_exception exception)
     {
@@ -88,5 +83,10 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
 void PrinterHead::MovePrinterHeadHome()
 {
     this->_xMotor.MoveHome();
+
+    msleep(1000);
+
     this->_yMotor.MoveHome();
+
+    msleep(1000);
 }

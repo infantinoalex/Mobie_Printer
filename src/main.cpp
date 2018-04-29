@@ -41,9 +41,12 @@ int main(int argc, char ** argv)
             std::cout << "Caught exception while trying to draw image." << std::endl;
             std::cout << "Failed to draw image. Please try again." << std::endl;
             std::cout << "Exception: " << exception.what() << std::endl;
+
+	    msleep(1000);
         }
 
         std::cout << "Image has been drawn." << std::endl;
+	msleep(1000);
     }
 
     return 0;

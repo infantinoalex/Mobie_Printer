@@ -1,7 +1,7 @@
 CC = g++
 
-Printer: Controller.o CustomExceptions.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
-	$(CC) -o botball_user_program main.o CustomExceptions.o Motor.o PrinterHead.o Image.o Helper.o ColorImageConverter.o Controller.o -lwallaby
+Printer: Controller.o ColorImageConverter.o Image.o Helper.o Motor.o PrinterHead.o main.o
+	$(CC) -o botball_user_program main.o Motor.o PrinterHead.o Image.o Helper.o ColorImageConverter.o Controller.o -lwallaby
 
 main.o: main.cpp
 	$(CC) -c main.cpp
@@ -9,10 +9,7 @@ main.o: main.cpp
 Controller.o: Controller/Controller.cpp Controller/Controller.hpp Image/Image.hpp
 	$(CC) -c Controller/Controller.cpp
 
-CustomExceptions.o: Exception/CustomExceptions.cpp
-	$(CC) -c Exception/CustomExceptions.cpp
-
-ColorImageConverter.o: Image/ColorImageConverter.cpp Image/ColorImageConverter.hpp Image/ImageConverter.hpp Image/Image.hpp Exception/CustomExceptions.cpp
+ColorImageConverter.o: Image/ColorImageConverter.cpp Image/ColorImageConverter.hpp Image/ImageConverter.hpp Image/Image.hpp
 	$(CC) -c Image/ColorImageConverter.cpp
 
 Image.o: Image/Image.cpp Image/Image.hpp
@@ -24,7 +21,7 @@ Helper.o: Helper.cpp
 Motor.o: PrinterHead/Motor.cpp PrinterHead/Motor.hpp
 	$(CC) -c PrinterHead/Motor.cpp
 
-PrinterHead.o: PrinterHead/PrinterHead.cpp PrinterHead/PrinterHead.hpp PrinterHead/Motor.hpp Exception/CustomExceptions.cpp
+PrinterHead.o: PrinterHead/PrinterHead.cpp PrinterHead/PrinterHead.hpp PrinterHead/Motor.hpp
 	$(CC) -c PrinterHead/PrinterHead.cpp
 
 

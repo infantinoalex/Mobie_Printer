@@ -19,7 +19,12 @@ class Motor
         // Moves this motor to its home position
         void MoveHome();
 
+        // Clears the ticks of the motor
         void ClearMotorTicks();
+
+        // Stops the motor
+        void StopMotor();
+
 
     private:
         // The total ticks the motor has moved since it arrived home.
@@ -42,8 +47,6 @@ class Motor
 
         // The emergency sensor used to stop the motor.
         int _emergencySensorPort;
-
-        void StopMotor();
 };
 
 #endif

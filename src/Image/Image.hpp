@@ -31,7 +31,7 @@ class Image
 
     private:
         // The 1-D array representation of the image.
-	std::vector<unsigned int> _image;
+	    std::vector<unsigned int> _image;
 
         // The width of the image.
         int _width;

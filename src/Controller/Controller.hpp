@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 #include "../Image/Image.hpp"
-#include "../Image/ColorImageConverter.hpp"
+#include "../Image/ImageConverter.hpp"
 #include "../PrinterHead/PrinterHead.hpp"
 
 #include <stdexcept>
@@ -40,7 +40,7 @@ class Controller
         Image _image;
 
         // Used to convert what the camera sees to an image
-        ColorImageConverter _imageConverter;
+        ImageConverter _imageConverter;
 
         // The printer head object which controls the motors/pen for drawing
         PrinterHead _printerHead;

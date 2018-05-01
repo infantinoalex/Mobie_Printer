@@ -19,7 +19,7 @@ class ColorImageConverter
         ColorImageConverter(std::map<Colors, Image> colorImages);
 
         // Ovwritten to grab a pretermined image based upon a color.
-        Image GrabAndConvertImage();
+        virtual Image GrabAndConvertImage();
 
     private:
         // The current color channels setup on the wallaby.

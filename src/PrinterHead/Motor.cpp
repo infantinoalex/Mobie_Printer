@@ -46,15 +46,18 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
         velocity *= -1;
     }
 
-    if (digital(this->_emergencySensorPort))
-    {
-         this->StopMotor();
-	 throw std::runtime_error("Failed when moving motor as the emergency stop button was hit");
-    }
+    
     int expectedTotalTickCounter = this->_totalTicks + ticks;
     
     mtp(this->_motorPort, velocity, expectedTotalTickCounter);
-    bmd(this->_motorPort);
+    while (!get_motor_done(this->_motorPort))
+    {
+        if (digital(this->_emergencySensorPort))
+        {
+            this->StopMotor();
+	    throw std::runtime_error("Failed when moving motor as the emergency stop button was hit");
+        }
+    }
 
     this->StopMotor();
 }

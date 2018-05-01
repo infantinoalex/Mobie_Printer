@@ -2,6 +2,7 @@
 #define IMAGECONVERTER_HPP
 
 #include "Image.hpp"
+#include <stdexcept>
 
 /*
  * Based class with a single method that must be overwritten. This determines how the printer will
@@ -11,7 +12,10 @@ class ImageConverter
 {
     public:
         // Grabs frames from the camera and created an Image object from them.
-        Image GrabAndConvertImage();
+        virtual Image GrabAndConvertImage()
+        {
+            throw std::not_implemented("GrabAndConvertImage not implemented");  
+        };
 };
 
 #endif

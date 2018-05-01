@@ -1,5 +1,4 @@
 #include "Motor.hpp"
-#include "../Exception/CustomExceptions.cpp"
 
 #include <kipr/botball.h>
 #include <stdexcept>
@@ -47,19 +46,15 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
         velocity *= -1;
     }
 
-    int expectedTotalTickCounter = this->_totalTicks + ticks;
-    mtp(this->_motorPort, velocity, expectedTotalTickCounter);
-
-    int motorPosition = 0;
-    do
+    if (digital(this->_emergencySensorPort))
     {
-	motorPosition = get_motor_position_counter(this->_motorPort);
-	if (digital(this->_emergencySensorPort))
-	{
-	    this->StopMotor();
-	    throw std::runtime_error("Failed when moving motor as the emergency stop button was hit");
-	}
-    } while (motorPosition > expectedTotalTickCounter + 10 || motorPosition < expectedTotalTickCounter - 10);
+         this->StopMotor();
+	 throw std::runtime_error("Failed when moving motor as the emergency stop button was hit");
+    }
+    int expectedTotalTickCounter = this->_totalTicks + ticks;
+    
+    mtp(this->_motorPort, velocity, expectedTotalTickCounter);
+    bmd(this->_motorPort);
 
     this->StopMotor();
 }

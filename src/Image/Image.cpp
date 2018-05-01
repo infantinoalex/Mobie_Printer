@@ -1,5 +1,4 @@
 #include "Image.hpp"
-#include "../Exception/CustomExceptions.cpp"
 
 #include <stdexcept>
 #include <stdlib.h>

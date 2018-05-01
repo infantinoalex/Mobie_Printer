@@ -1,5 +1,4 @@
 #include "Controller.hpp"
-#include "../Exception/CustomExceptions.cpp"
 #include "../Helper.cpp"
 #include "../Image/ColorImageConverter.hpp"
 
@@ -42,6 +41,7 @@ void Controller::DrawImage()
     std::cout << "Moving printer head home before printing begins." << std::endl;
 
     this->_printerHead.MovePrinterHeadHome();
+    msleep(100);
 
     std::cout << "Printing out the pixels of the image." << std::endl;
     for (int heightLoop = 0; heightLoop < height; ++heightLoop)

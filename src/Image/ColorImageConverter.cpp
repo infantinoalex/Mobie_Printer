@@ -1,7 +1,6 @@
 #include "ColorImageConverter.hpp"
 #include "Colors.hpp"
 #include "../Helper.cpp"
-#include "../Exception/CustomExceptions.cpp"
 
 #include <stdexcept>
 #include <kipr/botball.h>

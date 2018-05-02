@@ -66,6 +66,7 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     }
     catch (std::exception exception)
     {
+        std::cout << "Caught exception while trying to draw in the Y direction" << std::endl;
         return false;
     }
 
@@ -76,6 +77,7 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     }
     catch(std::exception exception)
     {
+        std::cout << "Caught exception while trying to draw in the X directoin" << std::endl;
         return false;
     }
 

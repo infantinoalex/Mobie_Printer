@@ -6,6 +6,7 @@
  */
 enum Colors
 {
+    Default = -1,
     Blue = 0,
     Red = 1,
     Yellow = 2,

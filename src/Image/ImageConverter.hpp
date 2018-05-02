@@ -14,7 +14,7 @@ class ImageConverter
         // Grabs frames from the camera and created an Image object from them.
         virtual Image GrabAndConvertImage()
         {
-            throw std::not_implemented("GrabAndConvertImage not implemented");  
+            throw std::runtime_error("GrabAndConvertImage not implemented");  
         };
 };
 

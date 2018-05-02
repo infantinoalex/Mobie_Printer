@@ -25,6 +25,8 @@ class Motor
         // Stops the motor
         void StopMotor();
 
+	void PowerMotor(int power);
+
 
     private:
         // The total ticks the motor has moved since it arrived home.

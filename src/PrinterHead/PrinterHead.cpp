@@ -10,8 +10,8 @@
 #define XMOTOR_PORT 2
 #define YMOTOR_PORT 0
 #define PRINTERHEAD_PORT 3
-#define X_TICKS_BETWEEN_COORDINATES 200
-#define Y_TICKS_BETWEEN_COORDINATES 75
+#define X_TICKS_BETWEEN_COORDINATES 150
+#define Y_TICKS_BETWEEN_COORDINATES 150
 
 PrinterHead::PrinterHead()
 {
@@ -83,6 +83,26 @@ bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
     }
 
     return true;
+}
+
+void PrinterHead::PowerXMotor(int power)
+{
+    this->_xMotor.PowerMotor(power);
+}
+
+void PrinterHead::StopXMotor()
+{
+    this->_xMotor.StopMotor();
+}
+
+void PrinterHead::PowerYMotor(int power)
+{
+    this->_yMotor.PowerMotor(power);
+}
+
+void PrinterHead::StopYMotor()
+{
+    this->_yMotor.StopMotor();
 }
 
 void PrinterHead::MovePrinterHeadHome()

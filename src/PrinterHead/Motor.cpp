@@ -46,7 +46,6 @@ void Motor::PowerMotorForNumberOfTicks(int velocity, int ticks)
         velocity *= -1;
     }
 
-    
     int expectedTotalTickCounter = this->_totalTicks + ticks;
     
     mtp(this->_motorPort, velocity, expectedTotalTickCounter);
@@ -88,6 +87,11 @@ void Motor::ClearMotorTicks()
     clear_motor_position_counter(this->_motorPort);
     this->_totalTicks = 0;
     this->_lastTicksCount = 0;
+}
+
+void Motor::PowerMotor(int power)
+{
+    motor_power(this->_motorPort, power);
 }
 
 void Motor::StopMotor()

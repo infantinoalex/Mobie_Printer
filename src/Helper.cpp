@@ -19,7 +19,6 @@ static std::map<Colors, Image> CreateShapeImages()
     int width = 10;
     int height = 24;
 
-
     unsigned int squareImage[] = 
     {
         0,0,0,0,0,0,0,0,0,0,
@@ -144,7 +143,7 @@ static std::map<Colors, Image> CreateShapeImages()
         1,1,0,0,0,0,0,0,1,1
     };
 
-    std::vecotor<unsigned int> crossMarkImageVector(crossMarkImage, crossMarkImage + sizeof(crossMarkImage) / sizeof(crossMarkImage[0]));
+    std::vector<unsigned int> crossMarkImageVector(crossMarkImage, crossMarkImage + sizeof(crossMarkImage) / sizeof(crossMarkImage[0]));
     Image CrossMarkImage = Image();
     CrossMarkImage.SetImage(crossMarkImageVector, width, height);
 

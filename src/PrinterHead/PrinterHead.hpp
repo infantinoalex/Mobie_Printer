@@ -22,6 +22,11 @@ class PrinterHead
         // Tries to move the printer head to the x y location provided.
         bool TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove);
 
+	void PowerXMotor(int power);
+	void StopXMotor();
+	void PowerYMotor(int power);
+	void StopYMotor();
+
         // Moves the printer head back to the home position.
         void MovePrinterHeadHome();
 

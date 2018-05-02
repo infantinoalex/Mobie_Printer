@@ -1,5 +1,4 @@
-#include "Controller/Controller.hpp"
-#include "Helper.cpp"
+#include "Controller/SimplisticController.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -14,7 +13,7 @@ int main(int argc, char ** argv)
 
     // Initialize all classes here
   
-    Controller controller = Controller();
+    SimplisticController controller = SimplisticController();
 
     // End Initialization
 

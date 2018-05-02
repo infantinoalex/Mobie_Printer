@@ -38,10 +38,10 @@ Image ColorImageConverter::GrabAndConvertImage()
        
         camera_open();
 	
-	    std::cout << "Number of color channels" << numberOfChannels << std::endl;
+	std::cout << "Number of color channels" << numberOfChannels << std::endl;
 
         for (i = 0; i < numberOfChannels; ++i)
-	    {
+	{
             while(!camera_update());
 
             if (get_object_count(this->_colorChannels[i]))
@@ -50,12 +50,12 @@ Image ColorImageConverter::GrabAndConvertImage()
 
                 std::cout << "Found color " << ConvertColorToString(i) << "on screen. Converting to image." << std::endl;
 
-		        Colors colorValue = static_cast<Colors>(i);
+		Colors colorValue = static_cast<Colors>(i);
                 return this->_colorImages[colorValue];
             }
         }
 
-	    msleep(100);
+	msleep(100);
         loops++;
     }
 }

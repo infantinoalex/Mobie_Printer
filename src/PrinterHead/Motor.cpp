@@ -22,12 +22,12 @@ Motor::Motor(int motorPort, int ticksBetweenCoordinates, int homeSensorPort, int
 
     if (homeSensorPort < 0 || homeSensorPort > 9)
     {
-        throw std::invalid_argument("homeSensorPort cannot be less than 0 or greater than 5");
+        throw std::invalid_argument("homeSensorPort cannot be less than 0 or greater than 9");
     }
 
     if (emergencySensorPort < 0 || emergencySensorPort > 9)
     {
-        throw std::invalid_argument("emergencySensorPort cannot be less than 0 or greater than 5");
+        throw std::invalid_argument("emergencySensorPort cannot be less than 0 or greater than 9");
     }
 
     this->_motorPort = motorPort;

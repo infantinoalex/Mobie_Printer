@@ -45,11 +45,11 @@ void SimplisticController::GrabAndConvertImageData()
         }
 
         int i;
-        int numberOfChannels = sizeof(colorChannelsArray) / sizeof(colorChannelsArray);
+        int numberOfChannels = sizeof(colorChannelsArray) / sizeof(colorChannelsArray[0]);
        
         camera_open();
 	
-	std::cout << "Number of color channels" << numberOfChannels << std::endl;
+	std::cout << "Number of color channels " << numberOfChannels << std::endl;
 
         for (i = 0; i < numberOfChannels; ++i)
 	{
@@ -174,9 +174,9 @@ void SimplisticController::DrawCross()
     msleep(2000);
     this->_printerHead.PowerXMotor(-20);
     msleep(4000);
-    this->_printerHead.StopYMotor();
+    this->_printerHead.StopXMotor();
 
-    this->_printerHead.LowerPrinter();
+    this->_printerHead.RaisePrinter();
 }
 
 void SimplisticController::DrawOutline()
@@ -202,6 +202,4 @@ void SimplisticController::DrawOutline()
     this->_printerHead.StopYMotor();
     
     this->_printerHead.RaisePrinter();
-
-
 }

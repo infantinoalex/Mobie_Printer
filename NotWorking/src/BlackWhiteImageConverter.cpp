@@ -1,4 +1,4 @@
-#include "EdgeImageConverter.hpp"
+#include "../includes/EdgeImageConverter.hpp"
 
 #include <stdexcept> 
 #include <kipr/botball.h>
@@ -12,6 +12,7 @@ BlackWhiteImageConverter::BlackWhiteImageConverter()
     this->_biggestObjectIndex = 0;
 }
 
+// This is a POC and not working. Was a WIP
 Image BlackWhiteImageConverter::GrabAndConvertImage()
 {
     // Opens camera and sets the max height and width to the possible max for the printer

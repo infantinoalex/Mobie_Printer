@@ -43,9 +43,6 @@ class Motor
 
         // The sensor used to determine if the motor has moved to the home position.
         int _homeSensorPort;
-        
-        // The correct value used to determine if the motor has moved to the home position.
-        int _correctHomeSensorValue;
 
         // The emergency sensor used to stop the motor.
         int _emergencySensorPort;

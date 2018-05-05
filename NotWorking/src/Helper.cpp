@@ -1,8 +1,8 @@
 #ifndef HELPER_HPP
 #define HELPER_HPP
 
-#include "Image/Colors.hpp"
-#include "Image/Image.hpp"
+#include "../includes/Colors.hpp"
+#include "../includes/Image.hpp"
 
 #include <string>
 #include <map>
@@ -19,70 +19,76 @@ static std::map<Colors, Image> CreateShapeImages()
     int width = 10;
     int height = 24;
 
+    // Creates a square that is stretched in the Y direction since the ticks between the Y coordinates
+    // are much smaller
     unsigned int squareImage[] = 
     {
         0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,1,1,1,1,1,1,1,1,0,
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,1,1,1,1,1,1,1,1,0,
         0,1,1,1,1,1,1,1,1,0,
         0,1,1,1,1,1,1,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,0,0,0,0,1,1,0,
-	0,1,1,1,1,1,1,1,1,0,
-	0,1,1,1,1,1,1,1,1,0,
-	0,1,1,1,1,1,1,1,1,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,0,0,0,0,1,1,0,
+	    0,1,1,1,1,1,1,1,1,0,
+	    0,1,1,1,1,1,1,1,1,0,
+	    0,1,1,1,1,1,1,1,1,0,
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,0,0,0,0,0,0,0,0,0
     };
 
     std::vector<unsigned int> squareImageVector(squareImage, squareImage + sizeof(squareImage) / sizeof(squareImage[0]));
     Image BlueSquare = Image();
     BlueSquare.SetImage(squareImageVector, width, height);
 
+    // Creates a circle that is stretched in the Y direction since the ticks between the Y coordinates
+    // are much smaller
     unsigned int circleImage[] =
     {
         0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,1,0,0,0,0,0,0,1,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,0,1,0,0,0,0,1,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,0,1,1,1,1,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,0
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,1,0,0,0,0,0,0,1,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,0,1,0,0,0,0,1,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,0,1,1,1,1,0,0,0,
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,0,0,0,0,0,0,0,0,0,
+	    0,0,0,0,0,0,0,0,0,0
     };
 
     std::vector<unsigned int> circleImageVector(circleImage, circleImage + sizeof(circleImage) / sizeof(circleImage[0]));
     Image RedCircle = Image();
     RedCircle.SetImage(circleImageVector, width, height);
 
+    // Creates an outline that is stretched in the Y direction since the ticks between the Y coordinates
+    // are much smaller
     unsigned int outlineImage[] =
     {
         1,1,1,1,1,1,1,1,1,1,
@@ -115,6 +121,8 @@ static std::map<Colors, Image> CreateShapeImages()
     Image OutlineImage = Image();
     OutlineImage.SetImage(outlineImageVector, width, height);
 
+    // Creates a X mark that is stretched in the Y direction since the ticks between the Y coordinates
+    // are much smaller
     unsigned int crossMarkImage[] =
     {
         1,1,0,0,0,0,0,0,1,1,

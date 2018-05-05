@@ -1,10 +1,11 @@
-#include "SimplisticController.hpp"
+#include "../includes/SimplisticController.hpp"
 
 #include <iostream>
 #include <stdexcept>
 
 #define BUMPER_PORT 0
 
+// Static method used to convert a Enum Colors to a string
 static std::string ConvertColorToString(int color)
 {
     std::string strings[] = { "Blue", "Red", "Yellow", "Green" };
@@ -21,6 +22,7 @@ SimplisticController::SimplisticController()
 
 bool SimplisticController::IsStartBumperHit()
 {
+    // Only returns true if the bumper has been hit
     if (digital(this->_bumperPort))
     {
         std::cout << "Bumper has been hit." << std::endl;
@@ -36,7 +38,9 @@ void SimplisticController::GrabAndConvertImageData()
     int colorChannelsArray[] = { (int)Blue, (int)Red, (int)Yellow, (int)Green };
     int loops = 0;
     while(true)
-    {
+    {   
+        // Used to determine if the camera polling has gone through too many loops so that it is not
+        // looping forever
         if (loops > 2000)
         {
             camera_close();
@@ -49,23 +53,25 @@ void SimplisticController::GrabAndConvertImageData()
        
         camera_open();
 	
-	std::cout << "Number of color channels " << numberOfChannels << std::endl;
+	    std::cout << "Number of color channels " << numberOfChannels << std::endl;
 
+        // Loops through all of the possible color channels that were defined to see if there is a color on the screen
         for (i = 0; i < numberOfChannels; ++i)
-	{
+	    {
             while(!camera_update());
 
-            if (get_object_count(colorChannelsArray[i]))
+            // Checks to make sure there is an object and that the object is large enough area to not be a glitch
+            if (get_object_count(colorChannelsArray[i]) && get_object_area(colorChannelsArray[i], 0) > 1000)
             {
                 camera_close();
 
                 std::cout << "Found color " << ConvertColorToString(i) << " on screen. Converting to image." << std::endl;
-		this->_foundImageColor = static_cast<Colors>(i);
-		return;
+		        this->_foundImageColor = static_cast<Colors>(i);
+		        return;
             }
         }
 
-	msleep(100);
+	    msleep(100);
         loops++;
     }
 }
@@ -77,6 +83,7 @@ void SimplisticController::DrawImage()
     this->_printerHead.MovePrinterHeadHome();
     msleep(100);
     
+    // Simple switch to determine what to draw based upon the color we found
     switch(this->_foundImageColor)
     {
         case Blue:
@@ -86,7 +93,7 @@ void SimplisticController::DrawImage()
 
         case Red:
             std::cout << "Drawing Circle" << std::endl;
-            this->DrawCircle();
+            this->DrawDiamond();
             break;
 
         case Green:
@@ -128,7 +135,7 @@ void SimplisticController::DrawSquare()
     this->_printerHead.RaisePrinter();
 }
 
-void SimplisticController::DrawCircle()
+void SimplisticController::DrawDiamond()
 {
     this->_printerHead.RaisePrinter();
 

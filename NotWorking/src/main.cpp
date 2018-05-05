@@ -1,4 +1,4 @@
-#include "Controller/SimplisticController.hpp"
+#include "../includes/SimplisticController.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -13,7 +13,7 @@ int main(int argc, char ** argv)
 
     // Initialize all classes here
   
-    SimplisticController controller = SimplisticController();
+    Controller controller = Controller();
 
     // End Initialization
 
@@ -40,11 +40,11 @@ int main(int argc, char ** argv)
             std::cout << "Failed to draw image. Please try again." << std::endl;
             std::cout << "Exception: " << exception.what() << std::endl;
 
-	    msleep(1000);
+	        msleep(1000);
         }
 
         std::cout << "Image has been drawn." << std::endl;
-	msleep(1000);
+	    msleep(1000);
     }
 
     return 0;

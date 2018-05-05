@@ -1,8 +1,8 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP
 
-#include "../Image/Colors.hpp"
-#include "../PrinterHead/PrinterHead.hpp"
+#include "Colors.hpp"
+#include "../includes/PrinterHead.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -43,9 +43,16 @@ class SimplisticController
         // The port the bumper is using
         int _bumperPort;
 
+        // Draws a square image
         void DrawSquare();
-        void DrawCircle();
+
+        // Draws a diamond image
+        void DrawDiamond();
+
+        // Draws a cross image
         void DrawCross();
+
+        // Draws an X outline
         void DrawOutline();
 };
 

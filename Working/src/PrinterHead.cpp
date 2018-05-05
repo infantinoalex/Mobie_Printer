@@ -1,4 +1,4 @@
-#include "PrinterHead.hpp"
+#include "../includes/PrinterHead.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -56,33 +56,6 @@ void PrinterHead::RaisePrinter()
     disable_servos();
 
     this->_isLowered = false;
-}
-
-bool PrinterHead::TryMovePrinterHead(int xDirectionToMove, int yDirectionToMove)
-{
-    try
-    {
-        int yDirectionToTicks = this->_yMotor.ConvertLocationToMoveToTicks(yDirectionToMove);
-        this->_yMotor.PowerMotorForNumberOfTicks(150, yDirectionToTicks);
-    }
-    catch (std::exception exception)
-    {
-        std::cout << "Caught exception while trying to draw in the Y direction" << std::endl;
-        return false;
-    }
-
-    try
-    {
-        int xDirectionToTicks = this->_xMotor.ConvertLocationToMoveToTicks(xDirectionToMove);
-        this->_xMotor.PowerMotorForNumberOfTicks(150, xDirectionToTicks);
-    }
-    catch(std::exception exception)
-    {
-        std::cout << "Caught exception while trying to draw in the X directoin" << std::endl;
-        return false;
-    }
-
-    return true;
 }
 
 void PrinterHead::PowerXMotor(int power)

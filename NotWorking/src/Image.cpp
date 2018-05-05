@@ -1,4 +1,4 @@
-#include "Image.hpp"
+#include "../includes/Image.hpp"
 
 #include <stdexcept>
 #include <stdlib.h>
@@ -91,5 +91,6 @@ unsigned int Image::GetImagePixelAtIndex(int indexX, int indexY)
         throw std::invalid_argument("The Y index cannot be less than 0.");
     }
 
-    return this->_image[this->_height * indexY + indexX];
+    // Indexing the 1D array as though it was a 2D array
+    return this->_image[this->_width * indexY + indexX];
 }

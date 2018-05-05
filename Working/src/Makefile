@@ -6,13 +6,13 @@ Printer: SimplisticController.o Motor.o PrinterHead.o main.o
 main.o: main.cpp
 	$(CC) -c main.cpp
 
-SimplisticController.o: Controller/SimplisticController.cpp Controller/SimplisticController.hpp
-	$(CC) -c Controller/SimplisticController.cpp
+SimplisticController.o: SimplisticController.cpp ../includes/SimplisticController.hpp
+	$(CC) -c SimplisticController.cpp
 
-Motor.o: PrinterHead/Motor.cpp PrinterHead/Motor.hpp
+Motor.o: Motor.cpp ../includes/Motor.hpp
 	$(CC) -c PrinterHead/Motor.cpp
 
-PrinterHead.o: PrinterHead/PrinterHead.cpp PrinterHead/PrinterHead.hpp PrinterHead/Motor.hpp
+PrinterHead.o: PrinterHead.cpp ../includes/PrinterHead.hpp ../includes/Motor.hpp
 	$(CC) -c PrinterHead/PrinterHead.cpp
 
 

@@ -1,6 +1,6 @@
-#include "ColorImageConverter.hpp"
+#include "../includes/ColorImageConverter.hpp"
 #include "Colors.hpp"
-#include "../Helper.cpp"
+#include "Helper.cpp"
 
 #include <stdexcept>
 #include <kipr/botball.h>
@@ -24,6 +24,7 @@ ColorImageConverter::ColorImageConverter(std::map<Colors, Image> colorImages)
 Image ColorImageConverter::GrabAndConvertImage()
 {
     int loops = 0;
+    // Loops through to try to find a color that the camera is seeing. If it loops too long, it will throw an exception
     while(true)
     {
         if (loops > 2000)
@@ -38,24 +39,26 @@ Image ColorImageConverter::GrabAndConvertImage()
        
         camera_open();
 	
-	std::cout << "Number of color channels" << numberOfChannels << std::endl;
+	    std::cout << "Number of color channels" << numberOfChannels << std::endl;
 
         for (i = 0; i < numberOfChannels; ++i)
-	{
+	    {
             while(!camera_update());
 
-            if (get_object_count(this->_colorChannels[i]))
+            // Checks to see if a color is on the screen and the area of the colored object is large enough to not be a glitch
+            if (get_object_count(this->_colorChannels[i]) && get_object_area(this->_colorChannels[0], 0) > 1000)
             {
+                // The color was found so we return the Image in the map that corresponds to the color
                 camera_close();
 
                 std::cout << "Found color " << ConvertColorToString(i) << "on screen. Converting to image." << std::endl;
 
-		Colors colorValue = static_cast<Colors>(i);
+		        Colors colorValue = static_cast<Colors>(i);
                 return this->_colorImages[colorValue];
             }
         }
 
-	msleep(100);
+	    msleep(100);
         loops++;
     }
 }

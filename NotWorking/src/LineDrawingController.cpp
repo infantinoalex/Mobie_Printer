@@ -1,9 +1,11 @@
-#include "LineDrawingController.hpp"
+#include "../includes/LineDrawingController.hpp"
 
 #include <iostream>
 
 #define BUMPER_PORT 0
 
+// WIP and not complete. This was supposed to be a more sophisticated version of the Controller that
+// will use some algorithm to actually follow paths and therefore produce a better image.
 LineDrawingController::LineDrawingController()
 {
     this->_printerHead = PrinterHead();

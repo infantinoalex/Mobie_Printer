@@ -2,7 +2,7 @@
 #define COLORIMAGECONVERTER_HPP
 
 #include "ImageConverter.hpp"
-#include "Colors.hpp"
+#include "../src/Colors.hpp"
 
 #include <stdlib.h>
 #include <map>
